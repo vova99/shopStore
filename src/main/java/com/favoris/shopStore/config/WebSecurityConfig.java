@@ -1,6 +1,7 @@
 package com.favoris.shopStore.config;
 
 
+import com.favoris.shopStore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,25 +16,27 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebSecurity
-@EnableTransactionManagement
-@ComponentScan("com.*")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
        @Autowired
        private DataSource dataSource;
+
+       @Autowired
+    UserService userService;
+
 
        @Override
        protected void configure(HttpSecurity http) throws Exception {
 
            http.authorizeRequests()
                     .antMatchers("/login", "/registration").permitAll()
-                    .antMatchers("/*").hasRole("USER")
+                    .antMatchers("/*").permitAll()
+//                    .antMatchers("/*").authenticated()
                     .and()
                         .formLogin()
                         .loginPage("/login")
-                        .failureForwardUrl("/registration")
-                        .successForwardUrl("/")
+                        .failureForwardUrl("/login?error=true")
+                        .successForwardUrl("/index")
                         .passwordParameter("password")
                         .usernameParameter("username")
                         .permitAll()
@@ -47,13 +50,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         }
 
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+    @Autowired
+    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("user")
+                .password("user")
+                .roles("USER")
+                .and()
+                .withUser("admin")
+                .password("admin")
+                .roles("ADMIN")
+                .and()
+                .passwordEncoder(NoOpPasswordEncoder.getInstance());
+
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .usersByUsernameQuery("select username, password, active from usr where username=?")
-                .authoritiesByUsernameQuery("select u.username, ur.roles from usr u ");//inner join user_role ur on u.id=ur.user_id where u.username=?
+                .authoritiesByUsernameQuery("select u.username, u.roles from usr u where u.username=?")
+                .passwordEncoder(NoOpPasswordEncoder.getInstance());//inner join user_role ur on u.id=ur.user_id where u.username=?
     }
 
 

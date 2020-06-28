@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Favoris</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script></head>
+<body>
+<div th:replace="~{fragments/fragHeaders :: adminHeader}"></div>
+
+
+<p th:text="${test}">nothing</p>
+ala;lma;
+<div sec:authentication="authorities">
+    The value of the "name" property of the authentication object should appear here.
+</div>
+<p sec:authorize="hasRole('ADMIN')">
+    <a th:href="@{/adminPage}" class="btn btn-primary"></a>
+</p>
+</body>
+</html>
