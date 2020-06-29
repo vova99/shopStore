@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 @RequestMapping("/admin")
 @Controller
@@ -89,7 +92,10 @@ public class AdminController {
     }
 
     @PostMapping("/addFurnitureType")
-    public String addFurnitureTypes(FurnitureType ft ,Model model){
+    public String addFurnitureTypes(FurnitureType ft ,Model model, @RequestParam MultipartFile photo) throws IOException {
+        String path = System.getProperty("user.home")+ File.separator+"images" + File.separator;
+        photo.transferTo(new File(path+photo.getOriginalFilename()));
+        ft.setPhotoPath("/img/"+photo.getOriginalFilename());
         furnitureTypeService.save(ft);
         return "redirect:/admin/allFurnitureTypes";
     }

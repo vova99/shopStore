@@ -1,6 +1,7 @@
 package com.favoris.shopStore.controllers;
 
 import com.favoris.shopStore.entity.User;
+import com.favoris.shopStore.service.FurnitureTypeService;
 import com.favoris.shopStore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,13 +14,14 @@ import java.util.Map;
 
 @Controller
 public class MainController {
-//    @GetMapping("/")
-//    public String index(){
-//        return "login";
-//    }
+
 
     @Autowired
     UserService userService;
+    @Autowired
+    FurnitureTypeService furnitureTypeService;
+
+
     @GetMapping("/registration")
     public String getRegistry(){
         return "registration";
@@ -28,6 +30,7 @@ public class MainController {
 
     @PostMapping("/index")
     public String gtIndex(Model model){
+        model.addAttribute("furnitureTypes",furnitureTypeService.findAll());
         model.addAttribute("test","workingHarf") ;
         return "index";
     }
@@ -42,12 +45,4 @@ public class MainController {
         return "login";
     }
 
-//    @PostMapping("/login")
-//    public String postLogin(Model model){
-////        System.out.println(model.getAttribute("error").toString());
-////        if (model.getAttribute("error")!=null){
-////            model.addAttribute("errorMessage","Something wrong! Check your data.");
-////        }
-//        return "redirect:/login";
-//    }
 }

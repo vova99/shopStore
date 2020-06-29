@@ -34,7 +34,7 @@
 
     <!--Form ADD-->
     <div class="container">
-        <form th:action="@{/admin/addFurnitureType}" method="post">
+        <form th:action="@{/admin/addFurnitureType}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nameOfType">Name Of Type</label>
                 <input type="text" class="form-control" id="nameOfType" name="nameOfType">
@@ -42,7 +42,11 @@
             <div class="form-group">
                 <label for="description">Description</label>
                 <textarea class="form-control" id="description" name="description" cols="50" rows="4"></textarea>
-                </div>
+            </div>
+            <div class="form-group">
+                <label for="photo">Choose photo</label>
+                <input type="file" class="form-control" id="photo" name="photo">
+            </div>
            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

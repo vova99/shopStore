@@ -15,6 +15,7 @@ public class FurnitureType {
     private int furnitureType_id;
 
     private String nameOfType;
+    private String photoPath;
     private String description;
 
 
