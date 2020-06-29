@@ -23,7 +23,7 @@ public class ThymeleafConfig extends WebMvcConfigurerAdapter {
 
         registry.
                 addResourceHandler("/img/**")
-                .addResourceLocations("file:" + System.getProperty("user.home") + File.separator + "images" + File.separator);
+                .addResourceLocations("file:" + System.getProperty("user.home") + File.separator);
 
     }
 }

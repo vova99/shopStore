@@ -93,7 +93,7 @@ public class AdminController {
 
     @PostMapping("/addFurnitureType")
     public String addFurnitureTypes(FurnitureType ft ,Model model, @RequestParam MultipartFile photo) throws IOException {
-        String path = System.getProperty("user.home")+ File.separator+"images" + File.separator;
+        String path = System.getProperty("user.home")+ File.separator;
         photo.transferTo(new File(path+photo.getOriginalFilename()));
         ft.setPhotoPath("/img/"+photo.getOriginalFilename());
         furnitureTypeService.save(ft);
