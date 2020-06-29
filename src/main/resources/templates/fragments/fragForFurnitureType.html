@@ -1,0 +1,49 @@
+<!--ADD Furniture Type-->
+<th:block xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="allFurnitureType">
+
+    <section class="container-fluid p-0">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name of type</th>
+                    <th scope="col">Description</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="ft, index : ${furnitureTypes}">
+                    <th scope="row" th:text="${index.count}"></th>
+                    <td th:text="${ft.nameOfType}"></td>
+                    <td th:text="${ft.description}"></td>
+                                    <td>
+                        <div class="btn-group" role="group">
+                            <!--<a th:href="@{'/admin/changeFurnitureType-'+${ft.id}}" class="btn btn-primary">Change</a>-->
+                            <a th:href="@{'/admin/deleteFurnitureType-'+${ft.furnitureType_id}}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+
+    <!--Form ADD-->
+    <div class="container">
+        <form th:action="@{/admin/addFurnitureType}" method="post">
+            <div class="form-group">
+                <label for="nameOfType">Name Of Type</label>
+                <input type="text" class="form-control" id="nameOfType" name="nameOfType">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" cols="50" rows="4"></textarea>
+                </div>
+           <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</th:block>

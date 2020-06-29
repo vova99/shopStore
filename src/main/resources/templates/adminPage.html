@@ -17,29 +17,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script></head></head>
 <body>
 <div th:replace="~{fragments/fragHeaders :: adminHeader}"></div>
-
-<section class="container-fluid p-0">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <tr th:each>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
+<p th:text="${fragmentPathUser}"></p>
+<div th:if="${fragmentPathUser!=null}">
+    <div th:replace="~{fragments/fragForUsers :: ${fragmentPathUser}}"></div>
+</div>
+<div th:if="${fragmentPathFurnitureType!=null}">
+    <div th:replace="~{fragments/fragForFurnitureType :: ${fragmentPathFurnitureType}}"></div>
+</div>
 </body>
 </html>

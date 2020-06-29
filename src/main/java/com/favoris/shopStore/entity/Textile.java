@@ -9,13 +9,16 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class FurnitureType {
+public class Textile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int furnitureType_id;
+    private int textile_id;
 
-    private String nameOfType;
-    private String description;
-
+    private String name;
+    private String provider;
+    private String type;
+    private String category;
+    private String color;
+    private String photoPath;
 
 }

@@ -17,24 +17,48 @@
 </head>
 <body>
 
+<!--<div class="container">-->
+    <!--<img src="img/logo.png" width="200px" height="50px">-->
+<!--</div>-->
+<!--<p th:text="${test}">nothing</p>-->
+<!--<div class="container">-->
+    <!--<form  method="post" th:action="@{/login}">-->
+        <!--<div class="form-group">-->
+            <!--<label for="examplePhoneNumber">Phone number</label>-->
+            <!--<input type="text" class="form-control" id="examplePhoneNumber" name="username">-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="exampleInputPassword1">Password</label>-->
+            <!--<input type="password" class="form-control" id="exampleInputPassword1" name="password">-->
+        <!--</div>-->
+        <!--<button type="submit" class="btn btn-primary" value="submit">Submit</button>-->
+        <!--<a th:href="@{/registration}" class="btn btn-primary">Registration</a>-->
+    <!--</form>-->
+<!--</div>-->
+
 <div class="container">
-    <img src="img/logo.png" width="200px" height="50px">
-</div>
-<p th:text="${test}">nothing</p>
-<div class="container">
-    <form  method="post" th:action="@{/login}">
-        <div class="form-group">
-            <label for="examplePhoneNumber">Phone number</label>
-            <input type="text" class="form-control" id="examplePhoneNumber" name="username">
+    <div class="row justify-content-center align-items-center" style="height:100vh">
+        <div class="col-md-12 col-lg-8 ">
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-title">Login to Favoris Shop</h5>
+                    <form th:action="@{/login}" method="post" autocomplete="off">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <button type="submit" id="sendlogin" class="btn btn-primary">login</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
-        </div>
-        <button type="submit" class="btn btn-primary" value="submit">Submit</button>
-        <a th:href="@{/registration}" class="btn btn-primary">Registration</a>
-    </form>
+    </div>
 </div>
+
+
 <div class="alert alert-danger" role="alert" th:if="false">
     This is a danger alert—check it out!
 </div>

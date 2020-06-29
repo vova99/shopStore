@@ -30,8 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
            http.authorizeRequests()
                     .antMatchers("/login", "/registration").permitAll()
-//                    .antMatchers("/*").permitAll()
-                    .antMatchers("/*").authenticated()
+                    .antMatchers("/*").permitAll()
+//                    .antMatchers("/*").authenticated()
                     .and()
                         .formLogin()
                         .loginPage("/login")

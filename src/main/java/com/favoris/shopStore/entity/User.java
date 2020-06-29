@@ -1,5 +1,6 @@
 package com.favoris.shopStore.entity;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,14 +11,21 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "usr")
+@Data
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String secondName;
+    private String city;
+    private String country;
+    private String shopCentr;
     private String password;
+    //Phone
     private String username;
+
+
     private boolean active;
 
     private boolean accountNonExpired = true;
