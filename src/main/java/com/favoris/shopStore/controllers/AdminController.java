@@ -1,8 +1,12 @@
 package com.favoris.shopStore.controllers;
 
 import com.favoris.shopStore.entity.FurnitureType;
+import com.favoris.shopStore.entity.Furnitures;
+import com.favoris.shopStore.entity.Textile;
 import com.favoris.shopStore.entity.User;
 import com.favoris.shopStore.service.FurnitureTypeService;
+import com.favoris.shopStore.service.FurnituresService;
+import com.favoris.shopStore.service.TextileService;
 import com.favoris.shopStore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +28,11 @@ public class AdminController {
     @Autowired
     FurnitureTypeService furnitureTypeService;
 
+    @Autowired
+    TextileService textileService;
+
+    @Autowired
+    FurnituresService furnituresService;
 
     @GetMapping("/adminPage")
     public String getAdminPage(){
@@ -105,4 +114,80 @@ public class AdminController {
         return "redirect:/admin/allFurnitureTypes";
     }
 
+    // TEXTILE CONTROLLERS
+
+    @GetMapping("/allTextile")
+    public String allTextile(Model model){
+        model.addAttribute("textileList",textileService.findAll());
+        model.addAttribute("fragmentPathTextile","allTextile");
+        return "adminPage";
+    }
+
+    @PostMapping("/addTextile")
+    public String addTextile(Textile tx , Model model, @RequestParam MultipartFile photo) throws IOException {
+        String path = System.getProperty("user.home")+ File.separator;
+        photo.transferTo(new File(path+photo.getOriginalFilename()));
+        tx.setPhotoPath("/img/"+photo.getOriginalFilename());
+        textileService.save(tx);
+        return "redirect:/admin/allTextile";
+    }
+    @GetMapping("/deleteTextile-{id}")
+    public String deleteTextile(@PathVariable("id") int id, Model model){
+        textileService.deleteByID(id);
+        return "redirect:/admin/allTextile";
+    }
+
+    // FURNITURE CONTROLLERS
+
+
+    @GetMapping("/allFurnitures")
+    public String getAllFurnitures(Model model){
+        model.addAttribute("allFurniture",furnituresService.findAll());
+        model.addAttribute("fragmentPathFurniture","allFurnitures");
+        return "adminPage";
+    }
+
+    @GetMapping("/changeFurniture-{id}")
+    public String changeFurniture(@PathVariable("id") int id, Furnitures fts, Model model){
+        Furnitures furnituresDB = furnituresService.findById(id);
+        model.addAttribute("furniture",furnituresDB);
+        model.addAttribute("fragmentPathFurniture","changeUser");
+        return "adminPage";
+    }
+    @PostMapping("/changeUser")
+    public String changeUser(User usr){
+        User userDB = userService.findById(usr.getId());
+        userDB.setFirstName(usr.getFirstName());
+        userDB.setSecondName(usr.getSecondName());
+        userDB.setPassword(usr.getPassword());
+        userDB.setUsername(usr.getUsername());
+        userService.save(userDB);
+        return "redirect:/admin/allUsers";
+    }
+
+    @GetMapping("/deleteUser-{id}")
+    public String deleteUser(@PathVariable("id") int id, Model model){
+        userService.deleteByID(id);
+        return "redirect:/admin/allUsers";
+    }
+
+    @GetMapping("/addUser")
+    public String addUser(Model model){
+
+        model.addAttribute("fragmentPathFurniture","addUser");
+        return "adminPage";
+    }
+
+    @PostMapping("/addUser")
+    public String addNewUser(User user, Map<String,Object> model){
+        User userFromDB = userService.selectByUsername(user.getUsername());
+        if(userFromDB!=null){
+            model.put("message","User alredy exists!");
+            return "registration";
+        }
+
+        user.setActive(true);
+        userService.save(user);
+        return "redirect:/admin/addUser";
+    }
 }

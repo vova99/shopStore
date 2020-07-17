@@ -46,7 +46,7 @@
                     <h5 class="card-title">Login to Favoris Shop</h5>
                     <form th:action="@{/login}" method="post" autocomplete="off">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="username">
+                            <input type="text" class="form-control" id="username" name="username" data-inputmask="'alias': 'phonebe'">
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" name="password">
@@ -63,5 +63,26 @@
 <div class="alert alert-danger" role="alert" th:if="false">
     This is a danger alert—check it out!
 </div>
+<script>
+    $(document).ready(function(){
+        $(":input").inputmask();
+
+
+
+        $("#username").inputmask({
+            mask: '999 999 9999',
+            placeholder: ' ',
+            showMaskOnHover: false,
+            showMaskOnFocus: false,
+            onBeforePaste: function (pastedValue, opts) {
+                var processedValue = pastedValue;
+
+//do something with it
+
+                return processedValue;
+            }
+        });
+    });
+</script>
 </body>
 </html>

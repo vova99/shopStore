@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FurnitureTypeImpl implements FurnitureTypeService {
+public class FurnitureTypeServiceImpl implements FurnitureTypeService {
     @Autowired
     FurnitureTypeDao furnitureTypeDao;
 

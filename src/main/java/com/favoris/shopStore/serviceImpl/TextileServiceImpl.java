@@ -4,12 +4,11 @@ import com.favoris.shopStore.dao.TextileDao;
 import com.favoris.shopStore.entity.Textile;
 import com.favoris.shopStore.service.TextileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by uer on 29.06.20.
- */
+@Service
 public class TextileServiceImpl implements TextileService {
     @Autowired
     TextileDao textileDao;

@@ -23,6 +23,7 @@ public class User implements UserDetails {
     private String shopCentr;
     private String password;
     //Phone
+
     private String username;
 
 
