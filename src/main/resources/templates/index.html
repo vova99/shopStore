@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width,initial-scale=1'/>
@@ -10,7 +10,6 @@
     <meta content='yes' name='apple-mobile-web-app-capable'/>
     <title>Favoris</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -19,6 +18,7 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script></head>
+    <link th:href="@{/css/mediaStyle.css}" rel="stylesheet">
 <body>
 <div th:replace="~{fragments/fragHeaders :: adminHeader}"></div>
 
@@ -30,7 +30,7 @@
 <!--<p sec:authorize="hasRole('ADMIN')">-->
     <!--<a th:href="@{/admin/adminPage}" class="btn btn-primary"></a>-->
 <!--</p>-->
-
+<h3 class="fontSizeMobile">INDEX</h3>
 <div class="container-fluid">
     <div class="row m-3">
         <div class="col-md-12 col-lg-4"  th:each="ft : ${furnitureTypes}">
@@ -45,5 +45,6 @@
         </div>
 
     </div>
+</div>
 </body>
 </html>

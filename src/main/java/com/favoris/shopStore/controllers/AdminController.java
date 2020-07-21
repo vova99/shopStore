@@ -140,54 +140,5 @@ public class AdminController {
     // FURNITURE CONTROLLERS
 
 
-    @GetMapping("/allFurnitures")
-    public String getAllFurnitures(Model model){
-        model.addAttribute("allFurniture",furnituresService.findAll());
-        model.addAttribute("fragmentPathFurniture","allFurnitures");
-        return "adminPage";
-    }
 
-    @GetMapping("/changeFurniture-{id}")
-    public String changeFurniture(@PathVariable("id") int id, Furnitures fts, Model model){
-        Furnitures furnituresDB = furnituresService.findById(id);
-        model.addAttribute("furniture",furnituresDB);
-        model.addAttribute("fragmentPathFurniture","changeUser");
-        return "adminPage";
-    }
-    @PostMapping("/changeUser")
-    public String changeUser(User usr){
-        User userDB = userService.findById(usr.getId());
-        userDB.setFirstName(usr.getFirstName());
-        userDB.setSecondName(usr.getSecondName());
-        userDB.setPassword(usr.getPassword());
-        userDB.setUsername(usr.getUsername());
-        userService.save(userDB);
-        return "redirect:/admin/allUsers";
-    }
-
-    @GetMapping("/deleteUser-{id}")
-    public String deleteUser(@PathVariable("id") int id, Model model){
-        userService.deleteByID(id);
-        return "redirect:/admin/allUsers";
-    }
-
-    @GetMapping("/addUser")
-    public String addUser(Model model){
-
-        model.addAttribute("fragmentPathFurniture","addUser");
-        return "adminPage";
-    }
-
-    @PostMapping("/addUser")
-    public String addNewUser(User user, Map<String,Object> model){
-        User userFromDB = userService.selectByUsername(user.getUsername());
-        if(userFromDB!=null){
-            model.put("message","User alredy exists!");
-            return "registration";
-        }
-
-        user.setActive(true);
-        userService.save(user);
-        return "redirect:/admin/addUser";
-    }
 }

@@ -19,17 +19,17 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
        @Autowired
-       private DataSource dataSource;
+       DataSource dataSource;
 
        @Autowired
-    UserService userService;
+       UserService userService;
 
 
        @Override
        protected void configure(HttpSecurity http) throws Exception {
 
            http.authorizeRequests()
-                    .antMatchers("/login", "/registration").permitAll()
+//                    .antMatchers("/login", "/registration").permitAll()
                     .antMatchers("/*").permitAll()
 //                    .antMatchers("/*").authenticated()
                     .and()
@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                         .logout()
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/login")
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .and()
                         .csrf().disable();

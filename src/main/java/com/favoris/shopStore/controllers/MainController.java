@@ -20,6 +20,10 @@ public class MainController {
     UserService userService;
 
 
+    @GetMapping("/")
+    public String getMainPage(){
+        return "login";
+    }
 
     @GetMapping("/registration")
     public String getRegistry(){
@@ -35,7 +39,6 @@ public class MainController {
 
     @GetMapping("/login")
     public String getLogin(Model model){
-        model.addAttribute("test","pidor");
         return "login";
     }
 
